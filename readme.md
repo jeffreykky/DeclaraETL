@@ -19,7 +19,11 @@ pip install declara_etl
 ## Running the Pipeline
 ```py
 from declara_etl import DeclaraETL, LocalDriver, Task
-
+"""
+  1. read parquet files from AWS S3
+  2. do some transformation using SQL
+  3. save it back to AWS S3
+"""
 env_var = dict(
     dataset_name = "Iris"
 )
