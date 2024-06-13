@@ -1,0 +1,20 @@
+version: glue_3_0_0
+
+pipeline:
+  #Bronze
+  read_landing:
+    operator: FileReader
+    format: parquet
+    path: s3a://declara-demo/datasets/{{env.dataset_name}}.parquet
+    table_name: iris
+
+  sql_transform:
+    operator: SparkSQL
+    sql: select *, 123 as temp_col from iris limit 5
+
+  output:
+    operator: SparkOutput
+    table: sql_transform
+    format: json
+    mode: overwrite
+    path: s3a://declara-demo/output2/
